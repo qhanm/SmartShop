@@ -1,0 +1,61 @@
+﻿@model SmartShop.Models.Account.LoginViewModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Index";
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SmartShop | Login</title>
+    <!-- Bootstrap -->
+    <link href="~/admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/admin/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/admin/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="~/admin/vendors/animate.css/animate.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="~/admin/build/css/custom.min.css" rel="stylesheet">
+</head>
+<body class="login">
+    <div>
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <section class="login_content">
+                    <form asp-action="Authen">
+                        <h1>Login Form</h1>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div>
+                            <input asp-for="UserName" class="form-control" placeholder="Username" required="" />
+                        </div>
+                        <div>
+                            <input asp-for="Password" value="631996" class="form-control" placeholder="Password" required="" />
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label style="float: left">
+                                    <input asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
+                                </label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <input type="submit" value="Login" class="btn btn-default" style="float: right" />
+                        </div>
+
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

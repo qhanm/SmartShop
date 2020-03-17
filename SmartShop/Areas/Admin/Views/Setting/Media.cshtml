@@ -1,0 +1,78 @@
+﻿@model List<QHN_SettingMetaDataViewModel>
+
+@using SmartShop.Extensions.Helpers
+@using SmartShop.Models.Response
+@using SmartShop.Extensions.Constant
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    GenericResult genericResult = ViewBag.Result as GenericResult; 
+}
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2><i class="fa fa-edit"></i> Setting <small>Media</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3" id="show-message"></div>
+                <div class="col-md-12">
+                    <form id="frmMedia" method="post" action="/admin/setting/media" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            </div>
+                        </div>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <input type="hidden" name="[@i].Id" value="@Model[i].Id" />
+                            <input type="hidden" name="[@i].MetaKey" value="@Model[i].MetaKey" />
+                            <input type="hidden" name="[@i].MetaType" value="@Model[i].MetaType" />
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                    @QHN_StringHelper.ParseMetaKeyToStringSettingMetaData(Model[i].MetaKey)
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @{
+                                        string ruleValidate = "required";
+                                        if(Model[i].MetaKey == SettingConstant.KEY_IMAGE_UPLOAD_MAX_FILE_SIZE || Model[i].MetaKey == SettingConstant.KEY_IMAGE_UPLOAD_FILE_LIMIT)
+                                        {
+                                            ruleValidate += ",number";
+                                        }
+                                    }
+                                    <input type="text" data-name="@QHN_StringHelper.ParseMetaKeyToStringSettingMetaData(Model[i].MetaKey)" data-field="@Model[i].MetaKey" data-validate="@ruleValidate" value="@Model[i].MetaValue" name="[@i].MetaValue" required="required" class="form-control col-md-7 col-xs-12 qhn-validate-cus">
+                                   <span class="field-validation-valid qhn-error-danger" id="@Model[i].MetaKey"></span>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button type="button" id="btnSubmitMedia" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+   
+    <script src="~/admin/app/js/controllers/setting/meida.js"></script>
+    <script>
+        var settingController = new SettingControllerMedia();
+        settingController.Initial();
+    </script>
+}

@@ -1,0 +1,95 @@
+@using SmartShop.App.ViewModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    QHN_SettingMetaDataViewModel uploadFileLimit = ViewBag.UploadImageFileLimit as QHN_SettingMetaDataViewModel;
+    QHN_SettingMetaDataViewModel uploadMaxFileSize = ViewBag.UploadImageMaxFileSize as QHN_SettingMetaDataViewModel;
+    QHN_SettingMetaDataViewModel uploadAcceptedFile = ViewBag.UploadImageAcceptedFile as QHN_SettingMetaDataViewModel;
+}
+
+<!--- https://onyxdev.net/snippets-item/dropzonejs-example-with-translations-custom-preview-and-upload-delete-file-with-php/  -->
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="qhn-h2-title">
+                <i class="fa fa-cloud-upload"></i> Media <small>List</small>
+            </h2>
+            <ul class="nav navbar-right panel_toolbox">
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="/admin/media/postfile" class="dropzone files-container">
+                        <div class="fallback">
+                            <input name="file" type="file" multiple />
+                        </div>
+                    </form>
+
+                    <div class="col-md-10 col-md-offset-1">
+                        <span class="qhn-h2-title">Only JPG, PNG, PDF, DOC (Word), XLS (Excel), PPT, ODT and RTF files types are supported.</span>
+                        <span class="qhn-h2-title">Maximum file size is 25MB.</span>
+
+                        <!-- Uploaded files section -->
+                        <h4 class="section-sub-title qhn-h2-title"><span>Uploaded</span> Files (<span class="uploaded-files-count">0</span>)</h4>
+                        <span class="no-files-uploaded qhn-h2-title">No files uploaded yet.</span>
+
+                        <!-- Preview collection of uploaded documents -->
+                        <div class="preview-container dz-preview uploaded-files">
+                            <div id="previews">
+                                <div id="onyx-dropzone-template">
+                                    <div class="onyx-dropzone-info">
+                                        <div class="thumb-container">
+                                            <img data-dz-thumbnail />
+                                        </div>
+                                        <div class="details">
+                                            <div>
+                                                <span class="qhn-h2-title" data-dz-name></span> <span class="qhn-h2-title" data-dz-size></span>
+                                            </div>
+                                            <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+                                            <div class="dz-error-message"><span class="qhn-error-danger" data-dz-errormessage></span></div>
+                                            <div class="actions">
+                                                <a href="#!" data-dz-remove><i class="fa fa-times"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Warnings -->
+                        <div id="warnings" class="qhn-h2-title">
+                            <span>Warnings will go here!</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles{
+    <link href="~/admin/vendors/dropzonejs/dropzone.css" rel="stylesheet" />
+    <link href="~/admin/vendors/dropzonejs/dropzone_custom.css" rel="stylesheet" />
+}
+
+@section Scripts{
+    <script src="~/admin/vendors/dropzonejs/dropzone.min.js"></script>
+    <script>
+        var objectParam = {
+            Url: '/admin/media/post-file',
+            MaxFile: @uploadFileLimit.MetaValue,
+            MaxFileSize: @uploadMaxFileSize.MetaValue,
+            AcceptedFiles: "@uploadAcceptedFile.MetaValue",
+        }
+        //var dropzoneCustom = new DropzoneCustom();
+        //dropzoneCustom.Initial(objectParam);
+    </script>
+    <script src="~/admin/app/js/shared/dropzone_custom.js"></script>
+}

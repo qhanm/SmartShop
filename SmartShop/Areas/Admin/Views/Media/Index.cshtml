@@ -1,0 +1,91 @@
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!--- https://onyxdev.net/snippets-item/dropzonejs-example-with-translations-custom-preview-and-upload-delete-file-with-php/  -->
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2><i class="fa fa-bars"></i> Media <small>List</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+            <div class="row">
+                <div class="col-md-8 col-md-8 col-xs-6">
+                    <p class="qhn-select-paginate">
+                        <label>Show </label> 
+                        <select class="form-control" id="qhn-select">
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                        <label> entries</label>
+                    </p>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-6 form-group pull-right top_search">
+                    <div class="input-group">
+                        <input type="text" class="form-control qhn-search-custom" placeholder="Search for..." id="qhn-search">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default qhn-search-custom" type="button">Go!</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="qhn-content">
+                <div class="col-md-55">
+                    <div class="thumbnail">
+                        <div class="image view view-first">
+                            <img style="width: 100%; display: block;" src="images/media.jpg" alt="image">
+                            <div class="mask">
+                                <p>Your Text</p>
+                                <div class="tools tools-bottom">
+                                    <a href="#"><i class="fa fa-link"></i></a>
+                                    <a href="#"><i class="fa fa-pencil"></i></a>
+                                    <a href="#"><i class="fa fa-times"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="caption">
+                            <p>Snow and Ice Incoming for the South</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label id="qhn-show-entry">Showing 1 to 10 of 57 entries</label>
+                </div>
+                <div class="col-md-6">
+                    <ul class="pagination pull-right qhn-pagination" id="qhn-pagination">
+                        <li><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                        <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles{ 
+    <link href="~/admin/vendors/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" />
+}
+
+@section Scripts{
+    <script src="~/admin/vendors/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="~/admin/app/js/shared/qhn_paginate.js"></script> 
+    <script src="~/admin/app/js/controllers/media/index.js"></script>
+
+    <script>
+        var mediaController = new MediaControlerIndex();
+        mediaController.Initial();
+    </script>
+}
